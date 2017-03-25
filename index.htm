@@ -50,19 +50,25 @@
     		items: []
     	};
      },
-	  render: function() {
-	      return (
-	        <div className="todoListMain">
-	          <div className="header">
-	            <form>
-	              <input placeholder="enter task">
-	              </input>
-	              <button type="submit">add</button>
-	            </form>
-	          </div>
-	        </div>
-	      );
-	    }
+     addItem: function(){
+
+     },
+     removeItem: function(){
+
+     },
+	 render: function() {
+      return (
+        <div className="todoListMain">
+          <div className="header">
+            <form onSubmit={this.addItem}>
+              <input placeholder="enter task">
+              </input>
+              <button type="submit">add</button>
+            </form>
+          </div>
+        </div>
+      );
+    }
 	});
     ReactDOM.render(
       <div>
