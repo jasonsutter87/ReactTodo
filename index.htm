@@ -45,6 +45,11 @@
     var destination = document.querySelector("#container");
 
     var TodoList = React.createClass({
+    getInitialState: function(){
+    	return {
+    		items: []
+    	};
+     },
 	  render: function() {
 	      return (
 	        <div className="todoListMain">
