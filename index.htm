@@ -44,32 +44,62 @@
     <script type="text/babel">
     var destination = document.querySelector("#container");
 
+    var TodoItems = React.createClass({
+    	render: function(){
+    		var todoEntries = this.props.entries;
+
+    		function createTasks(iten){
+    			return <li key={item.key}>{item.text}</li>
+    		}
+    		var listItems = todoEntries.map(createTasks);
+
+    		return (
+		      <ul className="theList">
+		        {listItems}
+		      </ul>
+		    );
+    	}
+    });
+
     var TodoList = React.createClass({
-    getInitialState: function(){
-    	return {
-    		items: []
-    	};
-     },
-     addItem: function(){
+	    getInitialState: function(){
+	    	return {
+	    		items: []
+	    	};
+	     },
+	     addItem: function(e){
+	     	 var itemArray = this.state.items;
 
-     },
-     removeItem: function(){
+	     	 itemArray.push(
+	     	 	{
+	     	 		text: this._inputElement.value,
+	     	 		key: Date.now()
+	     	 	}
+	 	 	);
 
-     },
-	 render: function() {
-      return (
-        <div className="todoListMain">
-          <div className="header">
-            <form onSubmit={this.addItem}>
-              <input placeholder="enter task">
-              </input>
-              <button type="submit">add</button>
-            </form>
-          </div>
-        </div>
-      );
-    }
-	});
+	     	 this.setState({
+	     	 	items: itemArray
+	     	 });
+
+	     	 this._inputElement.value = "";
+
+	     	 e.preventDefault();
+	     },
+		 render: function() {
+	      return (
+	        <div className="todoListMain">
+	          <div className="header">
+	            <form onSubmit={this.addItem}>
+	              <input ref={(a) => {this._textElement = a;}} placeholder="enter task">
+	              </input>
+	              <button type="submit">add</button>
+	            </form>
+	          </div>
+	          <TodoItems entries={this.state.items}/>
+	        </div>
+	      );
+	    }
+		});
     ReactDOM.render(
       <div>
           <TodoList/>
